@@ -5,12 +5,16 @@
  */
 package InterfaceMain;
 
+import InterfacePainels.Desenvolvedores;
 import InterfacePainels.Login;
 import InterfacePainels.MenuInicial;
+import InterfacePainels.Vendas;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import static java.lang.System.exit;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -27,6 +31,15 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        
+        //icon
+        try {
+            Image icon = Toolkit.getDefaultToolkit().getImage("src\\Images\\mainicon.png");
+            setIconImage(icon);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e, "ERRO", 0);
+        }
+        //
         
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -52,6 +65,7 @@ public class Main extends javax.swing.JFrame {
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         inicio = new javax.swing.JMenuItem();
+        loginmenu = new javax.swing.JMenuItem();
         logout = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         funcionalidades = new javax.swing.JMenu();
@@ -62,6 +76,7 @@ public class Main extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("GoldFork");
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -93,6 +108,15 @@ public class Main extends javax.swing.JFrame {
             }
         });
         jMenu3.add(inicio);
+
+        loginmenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/loginin.png"))); // NOI18N
+        loginmenu.setText("Login");
+        loginmenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginmenuActionPerformed(evt);
+            }
+        });
+        jMenu3.add(loginmenu);
 
         logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logOut.png"))); // NOI18N
         logout.setText("Logout");
@@ -182,7 +206,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
+        this.chamarVendas();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -190,7 +214,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        // TODO add your handling code here:
+        this.chamarDesenvolvedores();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -199,6 +223,10 @@ public class Main extends javax.swing.JFrame {
             exit(0);
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void loginmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginmenuActionPerformed
+        this.chamarLogin();
+    }//GEN-LAST:event_loginmenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,12 +272,14 @@ public class Main extends javax.swing.JFrame {
         funcionalidades.setEnabled(false);
         inicio.setEnabled(false);
         logout.setEnabled(false);
+        loginmenu.setEnabled(true);
     }
     //destravar menus após o login
     public void destravarMenus(){
         funcionalidades.setEnabled(true);
         inicio.setEnabled(true);
         logout.setEnabled(true);
+        loginmenu.setEnabled(false);
     }
     
     //chamadores de janela
@@ -265,7 +295,18 @@ public class Main extends javax.swing.JFrame {
         principal.revalidate();
         principal.repaint();
     }
-
+    public void chamarDesenvolvedores(){
+        principal.removeAll();
+        principal.add(new Desenvolvedores());
+        principal.revalidate();
+        principal.repaint();
+    }
+    public void chamarVendas(){
+        principal.removeAll();
+        principal.add(new Vendas(this));
+        principal.revalidate();
+        principal.repaint();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu funcionalidades;
     private javax.swing.JMenuItem inicio;
@@ -278,6 +319,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem loginmenu;
     private javax.swing.JMenuItem logout;
     private javax.swing.JPanel principal;
     private javax.swing.JMenuItem relatorios;
