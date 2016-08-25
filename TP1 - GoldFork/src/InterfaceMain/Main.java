@@ -5,10 +5,15 @@
  */
 package InterfaceMain;
 
-import InterfacePainels.Desenvolvedores;
-import InterfacePainels.Login;
-import InterfacePainels.MenuInicial;
-import InterfacePainels.Vendas;
+import InterfaceCadastramentoPainels.NovaLoja;
+import InterfaceCadastramentoPainels.NovoFuncionario;
+import InterfaceCadastramentoPainels.NovoProduto;
+import InterfaceCadastramentoPainels.NovoProdutoAtomico;
+import InterfaceCommonPainels.Desenvolvedores;
+import InterfaceCommonPainels.Login;
+import InterfaceCommonPainels.MenuInicial;
+import InterfaceCommonPainels.Relatorios;
+import InterfaceCommonPainels.Vendas;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -71,12 +76,18 @@ public class Main extends javax.swing.JFrame {
         funcionalidades = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         relatorios = new javax.swing.JMenuItem();
+        gerencialMenu = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("GoldFork");
+        setResizable(false);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -151,9 +162,54 @@ public class Main extends javax.swing.JFrame {
 
         relatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/reporting.png"))); // NOI18N
         relatorios.setText("Relatórios");
+        relatorios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                relatoriosActionPerformed(evt);
+            }
+        });
         funcionalidades.add(relatorios);
 
         jMenuBar2.add(funcionalidades);
+
+        gerencialMenu.setText("Gerencial");
+
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/add-new-user.png"))); // NOI18N
+        jMenuItem1.setText("Cadastrar Novo Funcionário");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        gerencialMenu.add(jMenuItem1);
+
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/package.png"))); // NOI18N
+        jMenuItem2.setText("Cadastrar Novo Produto");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        gerencialMenu.add(jMenuItem2);
+
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/apple-black-silhouette-with-a-leaf.png"))); // NOI18N
+        jMenuItem7.setText("Cadastrar Novo Produto Atômico");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        gerencialMenu.add(jMenuItem7);
+
+        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/shopping-cart-sign.png"))); // NOI18N
+        jMenuItem8.setText("Cadastrar Nova Loja");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        gerencialMenu.add(jMenuItem8);
+
+        jMenuBar2.add(gerencialMenu);
 
         jMenu1.setText("Sobre");
 
@@ -228,6 +284,26 @@ public class Main extends javax.swing.JFrame {
         this.chamarLogin();
     }//GEN-LAST:event_loginmenuActionPerformed
 
+    private void relatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relatoriosActionPerformed
+        this.chamarRelatorio();
+    }//GEN-LAST:event_relatoriosActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        this.chamarNovoFuncionario();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        this.chamarNovoProduto();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        this.chamarNovoProdutoAtomico();
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        this.chamarNovaLoja();
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -282,7 +358,7 @@ public class Main extends javax.swing.JFrame {
         loginmenu.setEnabled(false);
     }
     
-    //chamadores de janela
+    //chamadores de janela comuns
     public void chamarLogin(){
         principal.removeAll();
         principal.add(new Login(this));
@@ -307,17 +383,55 @@ public class Main extends javax.swing.JFrame {
         principal.revalidate();
         principal.repaint();
     }
+    public void chamarRelatorio(){
+        principal.removeAll();
+        principal.add(new Relatorios(this));
+        principal.revalidate();
+        principal.repaint();
+    }
+    
+    //chamadores de janelas de cadastramento
+    public void chamarNovoFuncionario(){
+        principal.removeAll();
+        principal.add(new NovoFuncionario(this));
+        principal.revalidate();
+        principal.repaint();
+    }
+    public void chamarNovoProduto(){
+        principal.removeAll();
+        principal.add(new NovoProduto(this));
+        principal.revalidate();
+        principal.repaint();
+    }
+    public void chamarNovoProdutoAtomico(){
+        principal.removeAll();
+        principal.add(new NovoProdutoAtomico(this));
+        principal.revalidate();
+        principal.repaint();
+    }
+    public void chamarNovaLoja(){
+        principal.removeAll();
+        principal.add(new NovaLoja(this));
+        principal.revalidate();
+        principal.repaint();
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu funcionalidades;
+    private javax.swing.JMenu gerencialMenu;
     private javax.swing.JMenuItem inicio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem loginmenu;
     private javax.swing.JMenuItem logout;
